@@ -6,13 +6,11 @@ using std::string;
 #include <functional>
 using std::function;
 
-#include "QuickCheck.h"
-
 namespace qcp {
 
 class PropBase {
 public:
-    PropBase(const string& name) : name_(name) {}
+    PropBase(const string& name);
 
     virtual bool Check() = 0;
 
@@ -26,9 +24,7 @@ template <typename... Ts>
 class Prop : public PropBase {
     typedef PropBase base;
 public:
-    Prop(const string& name) : base(name) {
-        QuickCheck::Instance()->Add(this);
-    }
+    Prop(const string& name) : base(name) {}
 
     template<typename T>
     void operator=(T f) {

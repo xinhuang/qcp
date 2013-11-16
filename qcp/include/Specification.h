@@ -6,19 +6,15 @@ using std::string;
 #include <vector>
 using std::vector;
 
-#include "QuickCheck.h"
-
 namespace qcp {
 
 class PropBase;
 
 class Spec {
 public:
-    Spec(const string& name) : name_(name) { QuickCheck::Instance()->Add(this); }
+    Spec(const string& name);
     virtual ~Spec();
 
-private:
-    friend void QuickCheck::Add(PropBase*);
     void Add(PropBase* prop);
 
 private:
