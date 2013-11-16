@@ -15,6 +15,9 @@ public:
     Spec(const string& name);
     virtual ~Spec();
 
+    Spec(const Spec&) = delete;
+    Spec(const Spec&&) = delete;
+
     void Add(PropBase* prop);
 
 private:

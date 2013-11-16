@@ -11,6 +11,9 @@ namespace qcp {
 class PropBase {
 public:
     PropBase(const string& name);
+    PropBase(const PropBase&) = delete;
+    PropBase(const PropBase&&) = delete;
+    virtual ~PropBase() {}
 
     virtual bool Check() = 0;
 

@@ -18,6 +18,8 @@ public:
         return instance;
     }
 
+    QuickCheck(const QuickCheck&) = delete;
+    QuickCheck(const QuickCheck&&) = delete;
     ~QuickCheck();
 
     void Add(Spec* spec);
