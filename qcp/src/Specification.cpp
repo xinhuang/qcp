@@ -23,7 +23,7 @@ void Spec::Add(PropBase* prop) {
     props_.push_back(prop);
 
     Register(name_, prop->name(), [=]() { 
-        assert(prop->Check()); 
+        prop->Check(); 
     });
 }
 

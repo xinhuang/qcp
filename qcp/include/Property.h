@@ -6,6 +6,10 @@ using std::string;
 #include <functional>
 using std::function;
 
+#include <gtest/gtest.h>
+
+#include "Gen.h"
+
 namespace qcp {
 
 class PropBase {
@@ -15,7 +19,7 @@ public:
     PropBase(const PropBase&&) = delete;
     virtual ~PropBase() {}
 
-    virtual bool Check() = 0;
+    virtual void Check() = 0;
 
     const string& name() const { return name_; }
 
@@ -32,16 +36,22 @@ public:
     template<typename T>
     void operator=(T f) {
         check_ = [=]() {
-            return true;
+            for (int i = 0; i < kTimes; ++i) {
+                if (!f(gen<Ts>()->Sample()...)) {
+                    ASSERT_TRUE(false);
+                    return;
+                }
+            }
         };
     }
 
-    bool Check() override {
-        return check_();
+    void Check() override {
+        check_();
     }
 
 private:
-    function<bool()> check_;
+    static const int kTimes = 100;
+    function<void()> check_;
 };
 
 template <typename... Ts>
