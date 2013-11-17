@@ -9,6 +9,8 @@ using std::make_shared;
 #include <vector>
 using std::vector;
 
+#include "to_string.h"
+
 namespace qcp {
 
 template <typename T>

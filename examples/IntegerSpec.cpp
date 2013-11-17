@@ -20,6 +20,10 @@ private:
     int _value;
 };
 
+string to_s(const Integer& v) {
+    return "<Integer: " + std::to_string(v.value()) + " >";
+}
+
 template <>
 class Gen<Integer> {
 public:
@@ -38,8 +42,13 @@ SPECIFICATION(integer_specification) {
         return (lhs == rhs) == (lhs.value() == rhs);
     };
 
+    Property<Integer, int>("WRONG: all Integers should be equal") = [](Integer lhs, int rhs) {
+        return lhs == rhs;
+    };
+
     Property<int>("Integer should equal to int type") = [](int n) {
         return n == Integer(n);
     };
+
 }
 

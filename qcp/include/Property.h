@@ -3,6 +3,7 @@
 
 #include <string>
 using std::string;
+using std::to_string;
 #include <functional>
 using std::function;
 
@@ -37,8 +38,7 @@ public:
     void operator=(T f) {
         check_ = [=]() {
             for (int i = 0; i < kTimes; ++i) {
-                if (!f(gen<Ts>()->Sample()...)) {
-                    GTEST_FATAL_FAILURE_(name().c_str());
+                if (!CheckBody(f, gen<Ts>()->Sample()...)) {
                     break;
                 }
             }
@@ -47,6 +47,36 @@ public:
 
     void Check() override {
         check_();
+    }
+
+private:
+    template <typename T>
+    bool CheckBody(T f, Ts... vs) {
+        if (!f(vs...)) {
+            string message = "\nArguments: " + ArgsToString(vs...);
+            GTEST_MESSAGE_(message.c_str(), ::testing::TestPartResult::kFatalFailure);
+            return false;
+        }
+        return true;
+    }
+
+    template <typename T>
+    bool CheckBody(T f) {
+        if (!f()) {
+            GTEST_FATAL_FAILURE_("<No Argument>");
+            return false;
+        }
+        return true;
+    }
+
+    template <typename T, typename... Ts>
+    string ArgsToString(const T& v, Ts... vs) {
+        return to_s(v) + ", " + ArgsToString(vs...);
+    }
+
+    template <typename T>
+    string ArgsToString(const T& v) {
+        return to_s(v);
     }
 
 private:
