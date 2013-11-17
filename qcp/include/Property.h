@@ -38,8 +38,8 @@ public:
         check_ = [=]() {
             for (int i = 0; i < kTimes; ++i) {
                 if (!f(gen<Ts>()->Sample()...)) {
-                    ASSERT_TRUE(false);
-                    return;
+                    GTEST_FATAL_FAILURE_(name().c_str());
+                    break;
                 }
             }
         };
