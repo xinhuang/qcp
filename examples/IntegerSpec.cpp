@@ -31,15 +31,11 @@ public:
 SPECIFICATION(integer_specification) {
 
     Property<Integer, Integer>("Integer with same value should equal") = [](Integer lhs, Integer rhs) {
-        if (lhs.value() == rhs.value())
-            return lhs == rhs;
-        return true;
+        return (lhs == rhs) == (lhs.value() == rhs.value());
     };
 
     Property<Integer, int>("Integer with same value int should equal") = [](Integer lhs, int rhs) {
-        if (lhs.value() == rhs)
-            return lhs == rhs;
-        return true;
+        return (lhs == rhs) == (lhs.value() == rhs);
     };
 
     Property<int>("Integer should equal to int type") = [](int n) {

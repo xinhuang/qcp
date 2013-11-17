@@ -7,7 +7,7 @@ SPECIFICATION(int_arithmatics) {
         return lhs + rhs <= abs(lhs) + abs(rhs);
     };
 
-    Property<int>("bad math: a integer is greater than it plus 1") = [](int a) {
+    Property<int>("WRONG: bad math, a integer is greater than it plus 1") = [](int a) {
         return a > a + 1;
     };
 
