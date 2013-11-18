@@ -6,6 +6,7 @@ using std::string;
 using std::to_string;
 #include <functional>
 using std::function;
+using std::forward;
 
 #include <gtest/gtest.h>
 
@@ -38,7 +39,7 @@ public:
     void operator=(T f) {
         check_ = [=]() {
             for (int i = 0; i < kTimes; ++i) {
-                if (!CheckBody(f, gen<Ts>()->Next()...)) {
+                if (!CheckBody(f, forward<Ts>(gen<Ts>()->Next())...)) {
                     break;
                 }
             }
