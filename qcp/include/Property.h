@@ -38,7 +38,7 @@ public:
     void operator=(T f) {
         check_ = [=]() {
             for (int i = 0; i < kTimes; ++i) {
-                if (!CheckBody(f, gen<Ts>()->Sample()...)) {
+                if (!CheckBody(f, gen<Ts>()->Next()...)) {
                     break;
                 }
             }
