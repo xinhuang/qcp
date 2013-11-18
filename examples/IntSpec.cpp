@@ -1,7 +1,7 @@
 #include "qcp.h"
 using namespace qcp;
 
-SPECIFICATION(int_arithmatics) {
+SPECIFICATION(int_arithmetics) {
 
     Property<int, int>("add 2 integer is no greater than add their absolute values") = [](int lhs, int rhs) {
         return lhs + rhs <= abs(lhs) + abs(rhs);
