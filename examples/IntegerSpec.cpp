@@ -21,14 +21,14 @@ private:
 };
 
 string to_s(const Integer& v) {
-    return "<Integer: " + std::to_string(v.value()) + " >";
+    return "<Integer: " + std::to_string(v.value()) + ">";
 }
 
 template <>
 class Gen<Integer> {
 public:
-    Integer Sample() {
-        return Integer(gen<int>()->Sample());
+    Integer Next() {
+        return Integer(gen<int>()->Next());
     }
 };
 

@@ -31,23 +31,23 @@ shared_ptr<Gen<T>> gen() {
 template <>
 class Gen<int> {
 public:
-    int Sample() const { return rand(); }
+    int Next() const { return rand(); }
 };
 
 template <>
 class Gen<bool> {
 public:
-    bool Sample() const { return gen<int>()->Sample() % 2 == 0; }
+    bool Next() const { return gen<int>()->Next() % 2 == 0; }
 };
 
 #define choose(lhs, rhs)\
-    (gen<bool>()->Sample()) ? (lhs) : (rhs)
+    (gen<bool>()->Next()) ? (lhs) : (rhs)
 
 template <typename T>
 class Gen<vector<T>> {
 public:
-    vector<T> Sample() const {
-        return choose(vector<T>(), concat<T>(Sample(), gen<T>()->Sample()));
+    vector<T> Next() const {
+        return choose(vector<T>(), concat<T>(Next(), gen<T>()->Next()));
     }
 };
 
