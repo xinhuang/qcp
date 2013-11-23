@@ -5,7 +5,7 @@ set(executable 1)
 
 set(src_dir .)
 
-include_directories(. ../qcp/include)
+include_directories(. ../include/qcp)
 link_directories()
 
 if (MSVC)
